@@ -1,0 +1,65 @@
+---
+layout: post
+title: jQuery on
+date: 2014.11.6
+categories: jekyll update
+---
+
+.on( events [, selector] [, data] , handler(eventObject) )
+
+## 定义和用法
+on() 方法在被选元素及子元素上添加一个或多个事件处理程序。
+
+自 jQuery 版本 1.7 起，on() 方法是 bind()、live() 和 delegate() 方法的新的替代品。该方法给 API 带来很多便利，我们推荐使用该方法，它简化了 jQuery 代码库。
+
+**注意**：使用 on() 方法添加的事件处理程序适用于当前及未来的元素（比如由脚本创建的新元素）。
+
+**提示**：如需移除事件处理程序，请使用 off() 方法。
+
+**提示**：如需添加只运行一次的事件然后移除，请使用 one() 方法。
+
+语法
+$(selector).on(event,childSelector,data,function,map)
+
+|   **参数**             | 描述
+|   **event**            | 必需。规定要从被选元素移除的一个或多个事件或命名空间。<br>由空格分隔多个事件值。必须是有效的事件。
+|   **childSelector**    |    可选。规定只能添加到指定的子元素上的事件处理程序 <br>（且不是选择器本身，比如已废弃的 delegate() 方法）。
+|   **data**             |    可选。规定传递到函数的额外数据。
+|   **function**         |    可选。规定当事件发生时运行的函数。
+|   **map**              |    规定事件映射 ({event:function, event:function, ...})，包含要添加到元素的一个或多个事件，以及当事件发生时运行的函数。
+
+
+## 概述
+绑定一个或多个事件的event handler function到选中的元素上
+
+## 参数
+
+### .on( events [, selector] [, data], handler(eventObject) )
+**event**：一个或多个空格分隔的事件类型和可选的命名空间，如“click”或“keydown.myPlugin”。
+
+**selector**：过滤那些触发事件的被选中元素的后代元素（selector匹配的后代元素才能触发）。如果选择器是null或者被省略，则选中元素总能触发事件。
+
+**data**：当事件被触发时，data通过event.data传递给事件处理函数。 
+
+**handler(eventObject)**：事件被触发时用来处理的函数。如果一个函数只是简单地返回false，则可以使用值		false（The value false is also allowed as a shorthand for a function that simply does return false.），		（就是说handler这个参数可以使用false来代替一个只返回false值的函数）
+
+### .on( events-map [, selector] [, data] )
+
+ **events-map**：{}名值对；名是一个或多个空格分隔的事件类型和可选的命名空间，值为事件被触发时用来处理的函数。
+
+### 参数data
+当event.data特性被使用的时候，这是非常有用的，或者其它独特的数据驻留在事件处理函数的closure（闭包）中。例如
+ 
+function greet(event) { alert("Hello "+event.data.name); }
+$("button").on("click", { name: "Karl" }, greet);
+$("button").on("click", { name: "Addy" }, greet);
+ 
+当按钮被点击的时候，上面的代码将产生两个不同的alerts。
+
+
+ data参数是作为一种补充添加在.on()方法上的，你也可以在trigger或者triggerHandler使用第二个参数传递数据给一个event handler。
+
+## 参考
+* [.on()](http://api.jquery.com/on/)
+* [jQuery on() 方法](http://www.w3cschool.cc/jquery/event-on.html)
+* []()

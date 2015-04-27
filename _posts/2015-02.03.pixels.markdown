@@ -1,0 +1,23 @@
+---
+layout: post
+title: Pixels
+date: 2015.02.02
+category: update
+---
+
+## 设备像素(device pixel)
+设备像素设是物理概念，指的是设备中使用的物理像素。
+
+## CSS像素(css pixel)
+CSS像素是Web编程的概念，指的是CSS样式代码中使用的逻辑像素。
+在CSS规范中，长度单位可以分为两类，绝对(absolute)单位以及相对(relative)单位。px是一个相对单位，相对的是设备像素(device pixel)。
+
+像素比
+屏幕分辨率（原始分辨率）
+视网膜显示屏
+
+## 参考
+1. [iPhone 6 Screens Demystified](http://www.paintcodeapp.com/news/iphone-6-screens-demystified) [一张图帮你看懂 iPhone 6 Plus 屏幕分辨率](http://iconmoon.com/blog2/iphone-6-plus-screen-size/)
+2. [前端工程师需要明白的「像素」](http://www.jianshu.com/p/af6dad66e49a)
+3. [设计师DPI指南(翻译)](http://www.w3ctech.com/topic/674)
+4. [【译】走向Retina Web ](http://www.html-js.com/article/The-front-end-of-the-porter)

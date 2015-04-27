@@ -1,0 +1,18 @@
+name: Jeen
+description: Still waters run deep.
+
+url: 
+paginate_path: "blog/page:num/"
+permalink: blog/:title/
+
+markdown: redcarpet
+highlighter: false
+paginate: 5
+
+navigation:
+ - title: Home
+   url: /index.html
+ - title: article
+   url: /articles.html
+ - title: About
+   url: /about.html
