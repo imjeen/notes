@@ -1,0 +1,70 @@
+---
+layout: post
+title:  "再看 jQuery.Evnet"
+date:   2015.05.17
+---
+
+源于Bootstrap中使用了jQuery.Event() 创建事件对象，再一次让我感受到『世界那么大』。
+
+之前有关javascript 事件的整理，见[javascript DOM Events](/blog/javascript-DOM-events/)
+
+关于自定义事件可以通过原生javascript的 CustomEvent构造函数 和 document.createEvent方法 定义。
+
+定义事件对象以后，就可以用addEventListener方法为该事件指定回调函数，用dispatchEvent方法触发该事件。
+
+对于jQuery而言，自定义事件的方式有：
+
+1. .on( events [, selector ] [, data ], handler )方法
+2. $.Event(events [, properties])
+
+都是通过 .trigger( eventType [, extraParameters ] ) 方法触发。
+
+## jQuery.Event Constructor
+
+> The jQuery.Event constructor is exposed and can be used when calling trigger. The new operator is optional.
+
+> Check trigger's documentation to see how to combine it with your own event object.
+
+由文档可知，通过jQuery.Event 构造函数 生成的实例，可以通过 trigger方法触发。另外对于on方法自定义的事件，也可以通过trigger触发。
+
+{% highlight javascript %}
+/Create a new jQuery.Event object without the "new" operator.
+var e = jQuery.Event( "click" );
+ 
+// trigger an artificial click event
+jQuery( "body" ).trigger( e );
+{% endhighlight %}
+
+## Event Properties
+
+{% highlight javascript %}
+// Create a new jQuery.Event object with specified event properties.
+var e = jQuery.Event( "keydown", { keyCode: 64 } );
+{% endhighlight %}
+
+为了不同浏览器的兼容性，jQuery统一规范了Event的属性，包括：target，relateTarget，pageX，pageY，which，metaKey。
+还有一些属性，具体看事件才有的属性，
+
+
+## Bootstrap Event
+
+让我们会过来看Bootstrap是如何使用 $.Event 的。
+
+{% highlight javascript %}
+var e    = $.Event('show.bs.modal', { relatedTarget: _relatedTarget })
+
+this.$element.trigger(e)
+{% endhighlight %}
+
+以上使用 Modal.prototype.show 方法里的两行代码。由jQuery的API说明知event.relatedTarget： The other DOM element involved in the event, if any. 在这里就是 触发弹出框的按钮。
+
+这里隐含地暴露出一个自定义事件接口show.bs.modal，也就是说，弹出框出来时，肯定会执行show方法，那么相应地会创建jQuery Event自定义事件，所以通过on方法又可以绑定这个自定义事件接口（相当于监听这个事件），从而执行相应的代码。
+
+ 往下继续看 Modal.prototype.show 方法，末尾又有 自定义事件接口shown.bs.modal，注意到语义地命名的不同，而且只有在真正动画完成时才会触发该自定义事件，所以 这两个事件触发的时机是不同的，从[Bootrstrap的官方API](http://getbootstrap.com/javascript/#modals-events)也可以知道这一点。
+
+同理也可以知道 hide.bs.modal 和 hidden.bs.modal 的不同和原理。除此外还有个 [loaded.bs.modal]() 接口.
+
+## 参考
+
+1. [jQuery AIP:　Category: Event Object](http://api.jquery.com/category/events/event-object/)
+2. [jQuery source](https://github.com/jquery/jquery/blob/master/src/event.js#636)
