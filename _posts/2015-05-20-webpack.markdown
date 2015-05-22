@@ -1,0 +1,160 @@
+---
+layout: post
+title:  "webpack TOOL"
+date:   2015.05.20
+---
+
+
+
+这是一份有关webpack的快速笔记，在做DEMO时零散记录下一些要点，主要阅读[官网说明](http://webpack.github.io/docs/)。
+
+之后将运用到小项目中，还有很多更多要深入。这几天阅读了doc和spec和example，以及动手实践的demo，感觉 webpack 像似集结了很多工具，主要是npm，类似之前用的bower，grunt，sass相关插件或工具都能在这里轻而易举地运用；而js的commonJS，AMD，CMD，ES6，UMD等各种规范，都能在这里共同使用。
+
+## 前提
+
+< node.js > was installed globally
+
+### package.json
+
+一般通过命令 npm init 来初始化package文件，然后 npm install < packageName > 安装所需模块。
+
+全局安装插件通过添加参数 -g。在package文件中的 dependencies 和 devDependencies 分别可由 命令参数 --save 和 --save-dev 添加值。
+
+### bower.json
+
+npm install bower
+npm install bower-installer 
+
+本地安装后，模块并未被设置到全局环境变量中，改为全局安装即可解决。
+
+首先本地安装 [bower](http://bower.io) <包(模块)管理器> 和 [bower-instarller](https://www.npmjs.com/package/bower-installer) <只提取所依赖包(模块)里的文件>
+
+通过 bower 可以将各个依赖库(包)缓存在 bower_components 文件夹中，可以通过 .bowerrc 文件配置选项 directory 明确指定缓存路径。
+
+bower init 命令创建并初始化 bower.json 文件。同于 npm 安装模块一样，bower 安装依赖包也类似：
+
+bower install < packageName > --save-dev
+
+bower-installer 模块配置在 bower.json 中的 install 选项
+
+
+## webpack <module>
+
+$ npm install webpack <--save-dev || --save >
+
+> #### webpack is a module bundler.
+> webpack takes modules with dependencies and generates static assets representing those modules.
+
+webpack也可以用来处理js，css和图片等资源，不过得安装对应的loader加载器。
+
+### stylesheet
+
+require('./stylesheet.css'), 会在DOM中直接 < style > 标签。可以通过模块 [extract-text-webpack-plugin ] 分离出CSS文件。
+
+npm install extract-text-webpack-plugin --save-dev
+
+
+安装模块 style-loader 和 css-loader 来像js模块化样式：
+
+npm install style-loader css-loader --save-dev
+
+
+
+### SASS
+
+### webpack.config.js
+
+### [use loader](http://webpack.github.io/docs/using-loaders.html)
+
+loader 总要是把资源文件进行转换。
+
+npm install xxx-loader --save-dev
+
+第一种方式 require
+
+require("jade!./template.jade");
+
+表示在好到 ./template.jade 文件，通过jade( jade-loader ) 加载器进行转换
+
+第二种方式 config
+{% highlight javascript %}
+{
+    module: {
+        loaders: [
+            { test: /\.jade$/, loader: "jade" },
+            // => "jade" loader is used for ".jade" files
+
+            { test: /\.css$/, loader: "style!css" },
+            // => "style" and "css" loader is used for ".css" files
+            // Alternative syntax:
+            { test: /\.css$/, loaders: ["style", "css"] },
+        ]
+    }
+}
+{% endhighlight %}
+
+### [use plugins](http://webpack.github.io/docs/using-plugins.html)
+
+plugins 包括内建和非内建（外部，npm安装）的，[lists of pulguins](http://webpack.github.io/docs/list-of-plugins.html)
+
+### [library and externals](http://webpack.github.io/docs/library-and-externals.html)
+
+两种情形： 在script标签独立引用资源 和 将某个模块或对象设为全局对象。
+
+> 1.depends on "jquery", but jquery should not be included in the bundle.
+> 2.library should be available at Foo in the global context.
+
+{% highlight javascript %}
+/*第一种情形*/
+output: {
+    // export itself to a global var
+    libraryTarget: "var",
+    // name of the global var: "Foo"
+    library: "Foo"
+},
+/*第二种情形*/
+externals: {
+    // require("jquery") is external and available
+    //  on the global var jQuery
+    "jquery": "jQuery"
+}
+{% endhighlight %}
+
+### [resolve](http://webpack.github.io/docs/resolving.html)
+
+三种路径请求格式:
+
+1.absolute path: require("/home/me/file") require("C:\Home\me\file")
+2.relative path: require("../src/file") require("./file")
+3.module path: require("module") require("module/lib/file")
+
+通过 resolve.alias 设置别名
+
+
+### [code spliting](http://webpack.github.io/docs/code-splitting.html)
+
+split app and vendor code
+
+{% highlight javascript %}
+odule.exports = {
+  entry: {
+    app: "./app.js",
+    vendor: ["jquery", "underscore", ...],
+  },
+  output: {
+    filename: "bundle.js"
+  },
+  plugins: [
+    new webpack.optimize.CommonsChunkPlugin(/* chunkName= */"vendor", /* filename= */"vendor.bundle.js")
+  ]
+};
+{% endhighlight %}
+
+###　[optimization](http://webpack.github.io/docs/optimization.html)　
+
+对于每个入口点（entry）进行相同部分提取。
+
+## Resource
+
+1.[npm docs](https://docs.npmjs.com/)
+2.[webpack docs](http://webpack.github.io/docs/)
