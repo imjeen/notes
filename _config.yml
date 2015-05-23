@@ -1,7 +1,7 @@
 name: Jeen
 description: Still waters run deep.
 
-url: ./
+url: http://imjeen.github.io/blog
 paginate_path: "blog/page:num/"
 permalink: blog/:title/
 
