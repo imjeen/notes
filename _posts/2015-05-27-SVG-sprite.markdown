@@ -73,6 +73,8 @@ HTML 对应地引用：
 
 由于浏览器安全策略限制的原因，我们不能在本地直接打开html文件来预览我们引用的svg文件，需要以服务器的形式来打开.
 
+### IE浏览器（包括IE11）不兼容外联SVG文件
+
 目前IE浏览器（包括IE11）不支持优雅的外联SVG文件，所以IE下只能将SVG相关的定义放在body标签里。除了后台程序引入外，还可以通过js插入svg节点。
 
 {% highlight javascript %}
@@ -84,7 +86,9 @@ ajax.onload = function(e) {
 ajax.send();
 {% endhighlight %}
 
-最后，从一开始我们就说过，SVG 是使用XML格式定义图像的，所以可以合并压缩SVG文件。通过Grunt或gulp等工具的插件实现，这里略。
+最后，从一开始我们就说过，SVG 是使用XML格式定义图像的，所以可以修改、合并压缩SVG文件。
+
+illustrator，在线站点，或icomoon导出等方式修改SVG；通过Grunt或gulp等工具的插件（如 [grunt-svgstore](https://github.com/FWeinb/grunt-svgstore/)实现，这里略。
 
 ## Resource
 
