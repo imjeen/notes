@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "SVG icon"
+title:  "SVG Sprite"
 date:   2015.05.27
 ---
 
@@ -73,6 +73,17 @@ HTML 对应地引用：
 
 由于浏览器安全策略限制的原因，我们不能在本地直接打开html文件来预览我们引用的svg文件，需要以服务器的形式来打开.
 
+目前IE浏览器（包括IE11）不支持优雅的外联SVG文件，所以IE下只能将SVG相关的定义放在body标签里。除了后台程序引入外，还可以通过js插入svg节点。
+
+{% highlight javascript %}
+var ajax = new XMLHttpRequest();
+ajax.open("GET", "../SVG/mytest.svg", true);
+ajax.onload = function(e) {
+    document.body.insertAdjacentHTML("afterBegin", ajax.responseText);
+}
+ajax.send();
+{% endhighlight %}
+
 最后，从一开始我们就说过，SVG 是使用XML格式定义图像的，所以可以合并压缩SVG文件。通过Grunt或gulp等工具的插件实现，这里略。
 
 ## Resource
@@ -81,3 +92,4 @@ HTML 对应地引用：
 2. [使用SVG中的Symbol元素制作Icon](http://isux.tencent.com/16292.html)
 3. [SVG symbol](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/symbol)
 4. [SVG `symbol` a Good Choice for Icons](https://css-tricks.com/svg-symbol-good-choice-icons/)
+5. [未来必热：SVG Sprite技术介绍](http://www.zhangxinxu.com/wordpress/2014/07/introduce-svg-sprite-technology/)
