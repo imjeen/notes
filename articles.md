@@ -9,7 +9,7 @@ title: Articles
     {% for post in site.posts %}
       <li>
       	<span class="date">{{ post.date | date_to_string }}</span>
-      	<h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
+      	<h3><a href="/notes{{ post.url }}">{{ post.title }}</a></h3>
       	<p class="description">{% if post.description %}{{ post.description  | strip_html | strip_newlines | truncate: 120 }}{% else %}{{ post.content | strip_html | strip_newlines | truncate: 120 }}{% endif %}</p>
       </li>
     {% endfor %}
