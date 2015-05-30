@@ -1,7 +1,8 @@
-name: Jeen
+name: Jeeeeeeeeen
 description: Still waters run deep.
+keywords: front-end notes
 
-url: http://imjeen.github.io/blog
+url: http://imjeen.github.io/notes
 paginate_path: "blog/page:num/"
 permalink: blog/:title/
 
