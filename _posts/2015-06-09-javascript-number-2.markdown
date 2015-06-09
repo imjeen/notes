@@ -87,9 +87,15 @@ isFinite函数返回一个布尔值，检查某个值是否为正常值，而不
 
 ### parseInt方法
 
-parseInt方法可以将字符串或小数转化为整数(默认十进制)。如果字符串头部有空格，空格会被自动去除。
+parseInt(string, radix)
 
-第一个参数是数值，则会将这个数值先转为10进制，然后再应用第二个参数。
+以基数radix(默认10，2～36)来解析的字符串string(或数字被转为字符串)，并返回数值。
+
+> The value to parse. If string is not a string, then it is converted to one. Leading whitespace in the string is ignored.。
+
+当参数 radix 的值为 0，或没有设置该参数时，parseInt() 会根据 string 来判断数字的基数。
+
+如果 string 以 "0x" 开头，parseInt() 会把 string 的其余部分解析为十六进制的整数。如果 string 以 0 开头，那么 ECMAScript v3 允许 parseInt() 的一个实现把其后的字符解析为八进制或十六进制的数字。如果 string 以 1 ~ 9 的数字开头，parseInt() 将把它解析为十进制的整数。
 
 parseInt的很多复杂行为，都是由八进制的前缀0引发的。因此，ECMAScript 5不再允许parseInt将带有前缀0的数字，视为八进制数。但是，为了保证兼容性，大部分浏览器并没有部署这一条规定。
 
@@ -119,4 +125,6 @@ Number('123.45#') // NaN
 
 ## 参考
 
-1. [数值](http://javascript.ruanyifeng.com/grammar/number.html)
+1. [数值](http://javascript.ruanyifeng.com/grammar/number.html), 对parseInt 解释有误
+2. [JavaScript parseInt() 函数](http://www.w3school.com.cn/jsref/jsref_parseInt.asp)
+3. [MDN parseInt()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/parseInt)
