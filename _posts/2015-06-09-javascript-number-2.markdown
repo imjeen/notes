@@ -89,7 +89,7 @@ isFinite函数返回一个布尔值，检查某个值是否为正常值，而不
 
 parseInt(string, radix)
 
-以基数radix(默认10，2～36)来解析的字符串string(或数字被转为字符串)，并返回数值。
+以基数radix(默认10，2～36)来解析的字符串string(或数字被转为字符串)，并返回数值(十进制)。
 
 > The value to parse. If string is not a string, then it is converted to one. Leading whitespace in the string is ignored.。
 
