@@ -2,17 +2,17 @@ name: Jeeeeeeeeen
 description: Still waters run deep.
 keywords: front-end notes
 
-url: http://imjeen.github.io/notes
+url: https://imjeen.github.io/notes
 paginate_path: "blog/page:num/"
 permalink: blog/:title/
 
 markdown: redcarpet
 highlighter: false
-paginate: 5
+paginate: 10
 
 navigation:
  - title: Home
-   url: /index.html
+   url: /
  - title: article
    url: /articles
  - title: About
