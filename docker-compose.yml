@@ -2,11 +2,13 @@ version: "3.9"
 
 services:
   blog:
-    working_dir: /blog/
-    image: jekyll/jekyll
+    build:
+      context: .
+    image: work_blog_v3
     container_name: work_blog
+    working_dir: /blog/
     volumes:
       - .:/blog/
     ports:
-      - "4000:4000"
-
+      - 4000:4000 # host:container
+    network_mode: host

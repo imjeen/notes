@@ -12,7 +12,7 @@ docker run --rm -it  -v $PWD:/blog -w /blog -p 4000:4000 jekyll/jekyll bash
 
 # 编译
 jekyll build
-# 启动服务，宿主可访问 http://localhost:4000
+# 启动服务，宿主可访问 http://localhost:4000 (TODO: docker-compose 启动时 无法访问，暂时配置不出来)
 jekyll serve
 ```
 
