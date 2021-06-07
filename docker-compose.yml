@@ -1,4 +1,4 @@
-version: "3.9"
+version: "3.0"
 
 services:
   blog:
@@ -11,4 +11,5 @@ services:
       - .:/blog/
     ports:
       - 4000:4000 # host:container
-    network_mode: host
+    # network_mode: host
+
