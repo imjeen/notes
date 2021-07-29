@@ -5,7 +5,7 @@ title: notes
 
 <ul class="list-posts">
   {% for post in site.posts %}
-    <li title="{{post.content | strip_html | truncate: 100 }}"><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ BASE_PATH }}{{ post.url }}" >{{ post.title }}</a></li>
+    <li title="{{post.content | strip_html | truncate: 100 }}"><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ site.url }}{{ post.url }}" >{{ post.title }}</a></li>
   {% endfor %}
 </ul>
 
